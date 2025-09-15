@@ -3,11 +3,12 @@ import { BuildOptions } from "./types/config";
 import { buildLoaders } from "./buildLoaders";
 import { buildResolvers } from "./buildResolvers";
 import { buildPlugins } from "./buildPlugins";
+import { buildDevServer } from "./buildDevServer";
 
-export function buildWebpackConfig(buildOptions: BuildOptions): Configuration {
-    const { paths } = buildOptions
+export function buildWebpackConfig(options: BuildOptions): Configuration {
+    const { paths, mode, isDev } = options
     return {
-        mode: 'development',
+        mode,
         entry: paths.entry,
         output: {
             filename: '[name].[contenthash].js',
@@ -18,6 +19,8 @@ export function buildWebpackConfig(buildOptions: BuildOptions): Configuration {
             rules: buildLoaders(),
         },
         resolve: buildResolvers(),
-        plugins: buildPlugins(buildOptions)
+        plugins: buildPlugins(options),
+        devtool: isDev ? 'inline-source-map' : undefined,
+        devServer: isDev ? buildDevServer(options) : undefined
     }
 }
