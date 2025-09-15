@@ -6,12 +6,11 @@ import path from 'path';
 export default (env: BuildEnv) => {
 
     const paths: BuildPaths = {
-        entry: path.resolve(__dirname, 'src', 'index.ts'),
+        entry: path.resolve(__dirname, 'src', 'index.tsx'),
         build: path.resolve(__dirname, 'build'),
         html: path.resolve(__dirname, 'public', 'index.html')
     }
 
-    console.log('ENV MODE IS ' + env.mode)
     const PORT = env.port || 3000;
     const mode = env.mode || 'development';
     const isDev = mode === 'development';
