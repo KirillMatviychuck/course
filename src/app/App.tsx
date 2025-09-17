@@ -1,16 +1,15 @@
+import { useTheme } from 'app/providers/ThemeProvider';
+import { classNames } from 'helpers/classNames/classNames';
 import { Suspense } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import { AboutPageAsync } from './pages/AboutPage/AboutPage.async';
-import { MainPageAsync } from './pages/MainPage/MainPage.async';
+import { routeConfig } from 'shared/config/routeConfig/routeConfig';
 import './styles/index.scss';
-import { useTheme } from './theme/useTheme';
-import { classNames } from './helpers/classNames/classNames';
+
 
 
 
 const App = () => {
     const { theme, toggleTheme } = useTheme()
-
     return (
         <div className={classNames('app', { hovered: true, selected: false }, [theme])}>
             <button onClick={toggleTheme}>TOGGLE THEME</button>
@@ -18,8 +17,11 @@ const App = () => {
             <Link to={'/about'} >About</Link>
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    <Route path={'/'} element={<MainPageAsync />} />
-                    <Route path={'/about'} element={<AboutPageAsync />} />
+                    {Object.values(routeConfig).map(({ element, path }) => (
+                        <Route key={path}
+                            element={element}
+                            path={path} />
+                    ))}
                 </Routes>
             </Suspense>
         </div>
