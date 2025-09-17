@@ -13,7 +13,7 @@ const Navbar: FC<NavbarProps> = ({ className }) => {
         <div className={classNames(cls.navbar, {}, [className])}>
             <ThemeSwitcher />
             <div className={(classNames(cls.links))}>
-                <AppLink theme={AppLinkTheme.SECONDARY} to={'/'} className={classNames(cls.mainLink)}>Main</AppLink>
+                <AppLink theme={AppLinkTheme.SECONDARY} to={'/'} className={classNames(cls.mainLink)}>Mains</AppLink>
                 <AppLink theme={AppLinkTheme.SECONDARY} to={'/about'} >About</AppLink>
             </div>
         </div>
