@@ -1,9 +1,9 @@
+import { AppRoutes } from 'app/providers/Router';
 import { useTheme } from 'app/providers/ThemeProvider';
 import { classNames } from 'helpers/classNames/classNames';
-import { Link } from 'react-router-dom';
-import { AppRoutes } from 'app/providers/Router';
-import './styles/index.scss';
 import { Navbar } from 'widgets/Navbar';
+import './styles/index.scss';
+import { Sidebar } from 'widgets/Sidebar';
 
 
 
@@ -13,7 +13,10 @@ const App = () => {
     return (
         <div className={classNames('app', { hovered: true, selected: false }, [theme])}>
             <Navbar />
-            <AppRoutes />
+            <div className='content-page'>
+                <Sidebar />
+                <AppRoutes />
+            </div>
         </div>
     )
 }
